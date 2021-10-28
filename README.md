@@ -1,6 +1,6 @@
-# healthcare_disruption_openSAFELY
+# Healthcare disruption in OpenSAFELY
 
-This is the code and configuration for healthcare_disruption_openSAFELY.
+This is the code and configuration for analyses using OpenSAFELY to study COVID-19 healthcare disruption.
 
 You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/markagreen/healthcare_disruption_openSAFELY)
 
