@@ -10,3 +10,15 @@ actions:
     outputs:
       highly_sensitive:
         cohort: output/input.csv
+## note: when running studies for real it is recommended to add the option --output-format='csv.gz' to the run command, 
+## and add '.gz' to the output file path, to produce the output in compressed form to reduce file size.
+
+  # Create new action called describe  
+  describe:  
+    run: r:latest analysis/report.R # Run this script in R
+    needs: [generate_study_population] # Action depends on earlier action outputs
+    outputs:
+      moderately_sensitive: 
+        cohort: output/descriptive.png # One output file, defined as moderately sensitive (i.e., might be released to the public)
+        
+        
