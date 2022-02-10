@@ -1,0 +1,26 @@
+﻿ICD10Code,Description
+J45 ,Asthma 
+J46 ,Status asthmaticus 
+I11,Hypertensive heart disease with (congestive) heart failure 
+I50 ,Heart failure 
+J81 ,Pulmonary oedema 
+E10,Insulin-dependent diabetes mellitus 
+E11,Non-insulin-dependent diabetes mellitus 
+E12,Malnutrition-related diabetes mellitus 
+E13,Other specified diabetes mellitus 
+E14,Unspecified diabetes mellitus 
+J20 ,Acute bronchitis 
+J41 ,Simple and mucopurulent chronic bronchitis 
+J42 ,Unspecified chronic bronchitis 
+J43 ,Emphysema 
+J44 ,Other chronic obstructive pulmonary disease 
+J47 ,Bronchiectasis 
+I20 ,Angina pectoris 
+I24,Coronary thrombosis not resulting in myocardial infarction 
+D50,Sideropenic dysphagia 
+I10 ,Essential (primary) hypertension 
+I11,Hypertensive heart disease without (congestive) heart failure 
+G40 ,Epilepsy 
+G41 ,Status epilepticus 
+R56 ,"Convulsions, not elsewhere classified "
+O15 ,Eclampsia 

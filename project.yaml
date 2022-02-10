@@ -5,20 +5,34 @@ expectations:
 
 actions:
 
-  generate_study_population:
-    run: cohortextractor:latest generate_cohort --study-definition study_definition
-    outputs:
-      highly_sensitive:
-        cohort: output/input.csv
+## Old code
+##  generate_study_population:
+##    run: cohortextractor:latest generate_cohort --study-definition study_definition
+##    outputs:
+##      highly_sensitive:
+##        cohort: output/input.csv
 ## note: when running studies for real it is recommended to add the option --output-format='csv.gz' to the run command, 
 ## and add '.gz' to the output file path, to produce the output in compressed form to reduce file size.
 
-  # Create new action called describe  
-  describe:  
-    run: r:latest analysis/report.R # Run this script in R
-    needs: [generate_study_population] # Action depends on earlier action outputs
+##  # Create new action called describe  
+##  describe:  
+##    run: r:latest analysis/report.R # Run this script in R
+##    needs: [generate_study_population] # Action depends on earlier action outputs
+##    outputs:
+##      moderately_sensitive: 
+##        cohort: output/descriptive.png # One output file, defined as moderately sensitive (i.e., might be released to the public)
+
+  generate_study_population:
+    run: cohortextractor:latest generate_cohort --study-definition study_definition --index-date-range "2019-01-01 to 2022-02-01 by month" --skip-existing --output-dir=output --output-format=csv.gz
     outputs:
-      moderately_sensitive: 
-        cohort: output/descriptive.png # One output file, defined as moderately sensitive (i.e., might be released to the public)
+      highly_sensitive:
+        cohort: output/input_*.csv.gz
+
+  generate_measures:
+    run: cohortextractor:latest generate_measures --study-definition study_definition --skip-existing --output-dir=output
+    needs: [generate_study_population]
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measure_*.csv
         
         
