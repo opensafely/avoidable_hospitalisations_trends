@@ -2,9 +2,15 @@
 from cohortextractor import StudyDefinition, Measure, patients # , codelist, codelist_from_csv
 
 # # Load codelists
-# from codelists import *
+# opensafely-test = codelist_from_csv(
+#     "codelists/opensafely-test.csv", system="icd10", column="icd10_code"
+# )
 
 # See https://docs.opensafely.org/study-def-variables/ for options and variables
+
+# Define dates
+index_date="2019-01-01"
+end_date = "2022-01-31"
 
 # Define study paramteres
 study = StudyDefinition(
@@ -16,12 +22,13 @@ study = StudyDefinition(
 
     index_date="2019-01-01",
     
-    # population=patients.all(),
+    # Select all people
+    population=patients.all(),
     
-    # Select patients who have remained at the same practice between the following dates
-    population = patients.registered_with_one_practice_between( 
-        "2019-01-01", "2022-02-10"
-    ),
+    # # Select patients who have remained at the same practice between the following dates
+    # population = patients.registered_with_one_practice_between( 
+    #     "2019-01-01", "2022-01-31"
+    # ),
     
     # Extract data on age
     age = patients.age_as_of( # Select age of patients on the specific date below
@@ -74,7 +81,7 @@ study = StudyDefinition(
 
     # Urban-rural
     urban_rural=patients.address_as_of(
-        "2020-02-29",
+        "2020-03-01",
         returning="rural_urban_classification",
         return_expectations={ # Need to update if not correct categories
             "rate": "universal",
@@ -109,7 +116,7 @@ study = StudyDefinition(
 
     # Died of any cause (ONS linked records)
     died_any = patients.died_from_any_cause(
-        between=["2019-01-01", "2022-02-10"],
+        between=["2019-01-01", "2022-01-31"],
         returning="binary_flag",
         return_expectations={"incidence": 0.05},
     ),
@@ -135,15 +142,15 @@ study = StudyDefinition(
     #       },
     #   ),
 
-    # Tested positive for COVID-19?
-    first_positive_test_date=patients.with_test_result_in_sgss(
-        pathogen="SARS-CoV-2",
-        test_result="positive",
-        between=["2019-01-01", "2022-02-10"],
-        find_first_match_in_period=True,
-        returning="binary_flag",
-        return_expectations={"incidence": 0.05},
-    ),
+    # # Tested positive for COVID-19?
+    # first_positive_test_date=patients.with_test_result_in_sgss(
+    #     pathogen="SARS-CoV-2",
+    #     test_result="positive",
+    #     between=["2019-01-01", "2022-02-10"],
+    #     find_first_match_in_period=True,
+    #     returning="binary_flag",
+    #     return_expectations={"incidence": 0.05},
+    # ),
 
 )
 
@@ -158,7 +165,7 @@ measures = [
     ),
     Measure(
         id="death_by_region",
-        numerator="died",
+        numerator="died_any",
         denominator="population",
         group_by="region",
         small_number_suppression=True,
