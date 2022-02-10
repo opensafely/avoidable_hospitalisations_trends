@@ -39,6 +39,27 @@ study = StudyDefinition(
           },
     ), 
     
+    # age_group = patients.categorised_as(
+    #     {
+    #         "0": "DEFAULT",
+    #         "16-59": """ age >= 16 AND age < 60""",
+    #         "60-69": """ age >= 60 AND age < 70""",
+    #         "70-79": """ age >= 70 AND age < 80""",
+    #         "80+": """ age >=  80 AND age < 120""", 
+    #     },
+    #     return_expectations={
+    #         "rate": "universal",
+    #         "category": {
+    #             "ratios": {
+    #                 "16-59": 0.5,
+    #                 "60-69": 0.125,
+    #                 "70-79": 0.25,
+    #                 "80+": 0.125,
+    #             }
+    #         },
+    #     },
+    # ),
+    
     # Extract patient's sex   
     sex = patients.sex(
           return_expectations={

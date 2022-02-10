@@ -3,7 +3,7 @@
     "path": "~/GitHub/healthcare_disruption_openSAFELY/analysis/study_definition.py",
     "project_path": "study_definition.py",
     "type": "python",
-    "hash": "3226323489",
+    "hash": "2786807237",
     "contents": "",
     "dirty": false,
     "created": 1644493314333.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "22,28",
-        "scrollLine": "0"
+        "cursorPosition": "60,8",
+        "scrollLine": "27"
     },
     "folds": "",
-    "lastKnownWriteTime": 1644504733,
+    "lastKnownWriteTime": 1644507711,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1644504733624,
+    "last_content_update": 1644507711183,
     "read_only": false,
     "read_only_alternatives": []
 }
