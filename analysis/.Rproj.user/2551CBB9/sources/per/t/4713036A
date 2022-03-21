@@ -3,7 +3,7 @@
     "path": "~/GitHub/healthcare_disruption_openSAFELY/analysis/report.R",
     "project_path": "report.R",
     "type": "r_source",
-    "hash": "2719378489",
+    "hash": "2760460968",
     "contents": "",
     "dirty": false,
     "created": 1644493313543.0,
@@ -11,14 +11,16 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "25,21",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1637750354,
+    "lastKnownWriteTime": 1647869696,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1637750354,
+    "last_content_update": 1647869696391,
     "read_only": false,
     "read_only_alternatives": []
 }
