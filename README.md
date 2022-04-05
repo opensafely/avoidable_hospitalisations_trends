@@ -1,8 +1,8 @@
-# Healthcare disruption in OpenSAFELY
+# Trends in avoidable hospitalisations (2019-2022)
 
-This is the code and configuration for analyses using OpenSAFELY to study COVID-19 healthcare disruption.
+This is the code and configuration for analyses using OpenSAFELY to study trends in avoidable hospitalisations. The project is currently under-development, so please check back later for full completion of documents, code and results.
 
-You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/markagreen/healthcare_disruption_openSAFELY)
+You can run this project via [Gitpod](https://gitpod.io) in a web browser by clicking on this badge: [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/opensafely/avoidable_hospitalisations_trends)
 
 * The paper is [here]()
 * Raw model outputs, including charts, crosstabs, etc, are in `released_outputs/`
@@ -12,9 +12,7 @@ You can run this project via [Gitpod](https://gitpod.io) in a web browser by cli
 
 # About the OpenSAFELY framework
 
-The OpenSAFELY framework is a Trusted Research Environment (TRE) for electronic
-health records research in the NHS, with a focus on public accountability and
-research quality.
+The OpenSAFELY framework is a Trusted Research Environment (TRE) for electronic health records research in the NHS, with a focus on public accountability and research quality.
 
 Read more at [OpenSAFELY.org](https://opensafely.org).
 
