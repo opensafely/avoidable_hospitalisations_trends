@@ -217,6 +217,33 @@ input_imd <- input_imd[, list(admitted = sum(admitted, na.rm =T), iexp_admitted 
 # input_imd$dsr_admitted_low <- input_imd$dsr_admitted - (1.96 * (sqrt(input_imd$dsr_admitted))) # Lower bound 
 # input_imd$dsr_admitted_upp <- input_imd$dsr_admitted + (1.96 * (sqrt(input_imd$dsr_admitted))) # Upper bound 
 
+# Drop small counts (i.e., <=5) so data can be released
+input_imd <- input_imd[input_imd$pop > 5] # Drop any rows where population is <= 5
+
+input_imd$admitted[input_imd$admitted <= 5] <- NA # So if numnber of admitted is 0-5, then we replace the value as missing
+input_imd$iexp_admitted[is.na(input_imd$admitted)] <- NA # Repeat for both expected counts as derived from above
+input_imd$dexp_admitted[is.na(input_imd$admitted)] <- NA 
+
+input_imd$admitted_acs_all[input_imd$admitted_acs_all <= 5] <- NA # Now repeat process for each measure individually
+input_imd$iexp_admitted_acs_all[is.na(input_imd$admitted_acs_all)] <- NA
+input_imd$dexp_admitted_acs_all[is.na(input_imd$admitted_acs_all)] <- NA
+
+input_imd$admitted_acs_acute[input_imd$admitted_acs_acute <= 5] <- NA 
+input_imd$iexp_admitted_acs_acute[is.na(input_imd$admitted_acs_all)] <- NA
+input_imd$dexp_admitted_acs_acute[is.na(input_imd$admitted_acs_all)] <- NA
+
+input_imd$admitted_acs_chronic[input_imd$admitted_acs_chronic <= 5] <- NA 
+input_imd$iexp_admitted_acs_chronic[is.na(input_imd$admitted_acs_chronic)] <- NA
+input_imd$dexp_admitted_acs_chronic[is.na(input_imd$admitted_acs_chronic)] <- NA
+
+input_imd$admitted_acs_vaccine[input_imd$admitted_acs_vaccine <= 5] <- NA 
+input_imd$iexp_admitted_acs_vaccine[is.na(input_imd$admitted_acs_vaccine)] <- NA
+input_imd$dexp_admitted_acs_vaccine[is.na(input_imd$admitted_acs_vaccine)] <- NA
+
+input_imd$admitted_eucs[input_imd$admitted_eucs <= 5] <- NA 
+input_imd$iexp_admitted_eucs[is.na(input_imd$admitted_eucs)] <- NA
+input_imd$dexp_admitted_eucs[is.na(input_imd$admitted_eucs)] <- NA
+
 # Save
 write.csv(input_imd, file = gsub("analysis", "", here("output/measures","standardised_imd_trends.csv")))
 
@@ -249,6 +276,33 @@ input_region$dexp_admitted_eucs <- (input_region$admitted_eucs / input_region$po
 # Sum data by age
 input_region <- input_region[, list(admitted = sum(admitted, na.rm =T), iexp_admitted = sum(iexp_admitted , na.rm = T), dexp_admitted = sum(dexp_admitted , na.rm = T), admitted_acs_all = sum(admitted_acs_all, na.rm =T), iexp_admitted_acs_all = sum(iexp_admitted_acs_all , na.rm = T), dexp_admitted_acs_all = sum(dexp_admitted_acs_all , na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm =T), iexp_admitted_acs_acute = sum(iexp_admitted_acs_acute , na.rm = T), dexp_admitted_acs_acute = sum(dexp_admitted_acs_acute , na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm =T), iexp_admitted_acs_chronic = sum(iexp_admitted_acs_chronic , na.rm = T), dexp_admitted_acs_chronic = sum(dexp_admitted_acs_chronic , na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm =T), iexp_admitted_acs_vaccine = sum(iexp_admitted_acs_vaccine , na.rm = T), dexp_admitted_acs_vaccine = sum(dexp_admitted_acs_vaccine , na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm =T), iexp_admitted_eucs = sum(iexp_admitted_eucs , na.rm = T), dexp_admitted_eucs = sum(dexp_admitted_eucs , na.rm = T), pop = sum(pop, na.rm = T), std_pop = sum(std_pop, na.rm = T)), by = c("sex", "region", "date")]
 
+# Drop small counts (i.e., <=5) so data can be released
+input_region <- input_region[input_region$pop > 5] # Drop any rows where population is <= 5
+
+input_region$admitted[input_region$admitted <= 5] <- NA # So if numnber of admitted is 0-5, then we replace the value as missing
+input_region$iexp_admitted[is.na(input_region$admitted)] <- NA # Repeat for both expected counts as derived from above
+input_region$dexp_admitted[is.na(input_region$admitted)] <- NA 
+
+input_region$admitted_acs_all[input_region$admitted_acs_all <= 5] <- NA # Now repeat process for each measure individually
+input_region$iexp_admitted_acs_all[is.na(input_region$admitted_acs_all)] <- NA
+input_region$dexp_admitted_acs_all[is.na(input_region$admitted_acs_all)] <- NA
+
+input_region$admitted_acs_acute[input_region$admitted_acs_acute <= 5] <- NA 
+input_region$iexp_admitted_acs_acute[is.na(input_region$admitted_acs_all)] <- NA
+input_region$dexp_admitted_acs_acute[is.na(input_region$admitted_acs_all)] <- NA
+
+input_region$admitted_acs_chronic[input_region$admitted_acs_chronic <= 5] <- NA 
+input_region$iexp_admitted_acs_chronic[is.na(input_region$admitted_acs_chronic)] <- NA
+input_region$dexp_admitted_acs_chronic[is.na(input_region$admitted_acs_chronic)] <- NA
+
+input_region$admitted_acs_vaccine[input_region$admitted_acs_vaccine <= 5] <- NA 
+input_region$iexp_admitted_acs_vaccine[is.na(input_region$admitted_acs_vaccine)] <- NA
+input_region$dexp_admitted_acs_vaccine[is.na(input_region$admitted_acs_vaccine)] <- NA
+
+input_region$admitted_eucs[input_region$admitted_eucs <= 5] <- NA 
+input_region$iexp_admitted_eucs[is.na(input_region$admitted_eucs)] <- NA
+input_region$dexp_admitted_eucs[is.na(input_region$admitted_eucs)] <- NA
+
 # Save
 write.csv(input_region, file = gsub("analysis", "", here("output/measures","standardised_region_trends.csv")))
 
@@ -279,6 +333,33 @@ input_urbrur$dexp_admitted_eucs <- (input_urbrur$admitted_eucs / input_urbrur$po
 
 # Sum data by age
 input_urbrur <- input_urbrur[, list(admitted = sum(admitted, na.rm =T), iexp_admitted = sum(iexp_admitted , na.rm = T), dexp_admitted = sum(dexp_admitted , na.rm = T), admitted_acs_all = sum(admitted_acs_all, na.rm =T), iexp_admitted_acs_all = sum(iexp_admitted_acs_all , na.rm = T), dexp_admitted_acs_all = sum(dexp_admitted_acs_all , na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm =T), iexp_admitted_acs_acute = sum(iexp_admitted_acs_acute , na.rm = T), dexp_admitted_acs_acute = sum(dexp_admitted_acs_acute , na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm =T), iexp_admitted_acs_chronic = sum(iexp_admitted_acs_chronic , na.rm = T), dexp_admitted_acs_chronic = sum(dexp_admitted_acs_chronic , na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm =T), iexp_admitted_acs_vaccine = sum(iexp_admitted_acs_vaccine , na.rm = T), dexp_admitted_acs_vaccine = sum(dexp_admitted_acs_vaccine , na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm =T), iexp_admitted_eucs = sum(iexp_admitted_eucs , na.rm = T), dexp_admitted_eucs = sum(dexp_admitted_eucs , na.rm = T), pop = sum(pop, na.rm = T), std_pop = sum(std_pop, na.rm = T)), by = c("sex", "urban_rural", "date")]
+
+# Drop small counts (i.e., <=5) so data can be released
+input_urbrur <- input_urbrur[input_urbrur$pop > 5] # Drop any rows where population is <= 5
+
+input_urbrur$admitted[input_urbrur$admitted <= 5] <- NA # So if numnber of admitted is 0-5, then we replace the value as missing
+input_urbrur$iexp_admitted[is.na(input_urbrur$admitted)] <- NA # Repeat for both expected counts as derived from above
+input_urbrur$dexp_admitted[is.na(input_urbrur$admitted)] <- NA 
+
+input_urbrur$admitted_acs_all[input_urbrur$admitted_acs_all <= 5] <- NA # Now repeat process for each measure individually
+input_urbrur$iexp_admitted_acs_all[is.na(input_urbrur$admitted_acs_all)] <- NA
+input_urbrur$dexp_admitted_acs_all[is.na(input_urbrur$admitted_acs_all)] <- NA
+
+input_urbrur$admitted_acs_acute[input_urbrur$admitted_acs_acute <= 5] <- NA 
+input_urbrur$iexp_admitted_acs_acute[is.na(input_urbrur$admitted_acs_all)] <- NA
+input_urbrur$dexp_admitted_acs_acute[is.na(input_urbrur$admitted_acs_all)] <- NA
+
+input_urbrur$admitted_acs_chronic[input_urbrur$admitted_acs_chronic <= 5] <- NA 
+input_urbrur$iexp_admitted_acs_chronic[is.na(input_urbrur$admitted_acs_chronic)] <- NA
+input_urbrur$dexp_admitted_acs_chronic[is.na(input_urbrur$admitted_acs_chronic)] <- NA
+
+input_urbrur$admitted_acs_vaccine[input_urbrur$admitted_acs_vaccine <= 5] <- NA 
+input_urbrur$iexp_admitted_acs_vaccine[is.na(input_urbrur$admitted_acs_vaccine)] <- NA
+input_urbrur$dexp_admitted_acs_vaccine[is.na(input_urbrur$admitted_acs_vaccine)] <- NA
+
+input_urbrur$admitted_eucs[input_urbrur$admitted_eucs <= 5] <- NA 
+input_urbrur$iexp_admitted_eucs[is.na(input_urbrur$admitted_eucs)] <- NA
+input_urbrur$dexp_admitted_eucs[is.na(input_urbrur$admitted_eucs)] <- NA
 
 # Save
 write.csv(input_urbrur, file = gsub("analysis", "", here("output/measures","standardised_urbrur_trends.csv")))
