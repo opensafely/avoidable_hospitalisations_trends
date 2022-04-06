@@ -1,0 +1,123 @@
+code,term
+E10,Type 1 diabetes mellitus
+E11,Type 2 diabetes mellitus
+E12,Malnutrition-related diabetes mellitus
+E13,Other specified diabetes mellitus
+E14,Unspecified diabetes mellitus
+E15,Nondiabetic hypoglycaemic coma
+E16,Other disorders of pancreatic internal secretion
+F00,Dementia in Alzheimer disease G30.-
+F01,Vascular dementia
+F02,Dementia in other diseases classified elsewhere
+F03,Unspecified dementia
+F04,"Organic amnesic syndrome, not induced by alcohol and other psychoactive substances"
+F05,"Delirium, not induced by alcohol and other psychoactive substances"
+F06,Other mental disorders due to brain damage and dysfunction and to physical disease
+F07,"Personality and behavioural disorders due to brain disease, damage and dysfunction"
+F09,Unspecified organic or symptomatic mental disorder
+F10,Mental and behavioural disorders due to use of alcohol
+F11,Mental and behavioural disorders due to use of opioids
+F12,Mental and behavioural disorders due to use of cannabinoids
+F13,Mental and behavioural disorders due to use of sedatives or hypnotics
+F14,Mental and behavioural disorders due to use of cocaine
+F15,"Mental and behavioural disorders due to use of other stimulants, including caffeine"
+F16,Mental and behavioural disorders due to use of hallucinogens
+F17,Mental and behavioural disorders due to use of tobacco
+F18,Mental and behavioural disorders due to use of volatile solvents
+F19,Mental and behavioural disorders due to multiple drug use and use of other psychoactive substances
+F20,Schizophrenia
+F21,Schizotypal disorder
+F22,Persistent delusional disorders
+F23,Acute and transient psychotic disorders
+F24,Induced delusional disorder
+F25,Schizoaffective disorders
+F28,Other nonorganic psychotic disorders
+F29,Unspecified nonorganic psychosis
+F30,Manic episode
+F31,Bipolar affective disorder
+F32,Depressive episode
+F33,Recurrent depressive disorder
+F34,Persistent mood [affective] disorders
+F38,Other mood [affective] disorders
+F39,Unspecified mood [affective] disorder
+F40,Phobic anxiety disorders
+F41,Other anxiety disorders
+F42,Obsessive-compulsive disorder
+F43,"Reaction to severe stress, and adjustment disorders"
+F44,Dissociative [conversion] disorders
+F45,Somatoform disorders
+F48,Other neurotic disorders
+F50,Eating disorders
+F51,Nonorganic sleep disorders
+F52,"Sexual dysfunction, not caused by organic disorder or disease"
+F53,"Mental and behavioural disorders associated with the puerperium, not elsewhere classified"
+F54,Psychological and behavioural factors associated with disorders or diseases classified elsewhere
+F55,Abuse of non-dependence-producing substances
+F59,Unspecified behavioural syndromes associated with physiological disturbances and physical factors
+F60,Specific personality disorders
+F61,Mixed and other personality disorders
+F62,"Enduring personality changes, not attributable to brain damage and disease"
+F63,Habit and impulse disorders
+F64,Gender identity disorders
+F65,Disorders of sexual preference
+F66,Psychological and behavioural disorders associated with sexual development and orientation
+F68,Other disorders of adult personality and behaviour
+F69,Unspecified disorder of adult personality and behaviour
+F70,Mild mental retardation
+F71,Moderate mental retardation
+F72,Severe mental retardation
+F73,Profound mental retardation
+F78,Other mental retardation
+F79,Unspecified mental retardation
+F80,Specific developmental disorders of speech and language
+F81,Specific developmental disorders of scholastic skills
+F82,Specific developmental disorder of motor function
+F83,Mixed specific developmental disorders
+F84,Pervasive developmental disorders
+F88,Other disorders of psychological development
+F89,Unspecified disorder of psychological development
+F90,Hyperkinetic disorders
+F91,Conduct disorders
+F92,Mixed disorders of conduct and emotions
+F93,Emotional disorders with onset specific to childhood
+F94,Disorders of social functioning with onset specific to childhood and adolescence
+F95,Tic disorders
+F98,Other behavioural and emotional disorders with onset usually occurring in childhood and adolescence
+F99,"Mental disorder, not otherwise specified"
+G40,Epilepsy
+G41,Status epilepticus
+I20,Angina pectoris
+I80,Phlebitis and thrombophlebitis
+I81,Portal vein thrombosis
+I82,Other venous embolism and thrombosis
+J40,"Bronchitis, not specified as acute or chronic"
+J41,Simple and mucopurulent chronic bronchitis
+J42,Unspecified chronic bronchitis
+J43,Emphysema
+J44,Other chronic obstructive pulmonary disease
+L03,Cellulitis
+N39,Other disorders of urinary system
+R07,Pain in throat and chest
+R50,Fever of other and unknown origin
+S00,Superficial injury of head
+T83,"Complications of genitourinary prosthetic devices, implants and grafts"
+W00,Fall on same level involving ice and snow
+W01,"Fall on same level from slipping, tripping and stumbling"
+W02,"Fall involving ice-skates, skis, roller-skates or skateboards"
+W03,"Other fall on same level due to collision with, or pushing by, another person"
+W04,Fall while being carried or supported by other persons
+W05,Fall involving wheelchair
+W06,Fall involving bed
+W07,Fall involving chair
+W08,Fall involving other furniture
+W09,Fall involving playground equipment
+W10,Fall on and from stairs and steps
+W11,Fall on and from ladder
+W12,Fall on and from scaffolding
+W13,"Fall from, out of or through building or structure"
+W14,Fall from tree
+W15,Fall from cliff
+W16,Diving or jumping into water causing injury other than drowning or submersion
+W17,Other fall from one level to another
+W18,Other fall on same level
+W19,Unspecified fall

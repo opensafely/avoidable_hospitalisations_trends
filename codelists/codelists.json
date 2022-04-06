@@ -1,3 +1,34 @@
 {
-  "files": {}
+  "files": {
+    "user-mgreen-ambulatory-care-sensitive-conditions.csv": {
+      "id": "user/mgreen/ambulatory-care-sensitive-conditions/1b9d1a9e",
+      "url": "https://codelists.opensafely.org/codelist/user/mgreen/ambulatory-care-sensitive-conditions/1b9d1a9e/",
+      "downloaded_at": "2022-04-06 10:26:33.269369Z",
+      "sha": "c5c77f0741c5f507dc4b270d2563ab082fef4bf3"
+    },
+    "user-mgreen-ambulatory-care-sensitive-conditions-acute.csv": {
+      "id": "user/mgreen/ambulatory-care-sensitive-conditions-acute/375f4dc9",
+      "url": "https://codelists.opensafely.org/codelist/user/mgreen/ambulatory-care-sensitive-conditions-acute/375f4dc9/",
+      "downloaded_at": "2022-04-06 10:26:33.712075Z",
+      "sha": "6d6b73e82463ced7e637a2c959704abf182a6938"
+    },
+    "user-mgreen-ambulatory-care-sensitive-conditions-chronic.csv": {
+      "id": "user/mgreen/ambulatory-care-sensitive-conditions-chronic/506ec0fe",
+      "url": "https://codelists.opensafely.org/codelist/user/mgreen/ambulatory-care-sensitive-conditions-chronic/506ec0fe/",
+      "downloaded_at": "2022-04-06 10:26:34.146069Z",
+      "sha": "77fbee654bcfe416deee303c6f1d8fbf91daaa49"
+    },
+    "user-mgreen-ambulatory-care-sensitive-conditions-vaccine-preventable.csv": {
+      "id": "user/mgreen/ambulatory-care-sensitive-conditions-vaccine-preventable/1e4fda94",
+      "url": "https://codelists.opensafely.org/codelist/user/mgreen/ambulatory-care-sensitive-conditions-vaccine-preventable/1e4fda94/",
+      "downloaded_at": "2022-04-06 10:26:35.721381Z",
+      "sha": "0c60dad3caafac3b4d339c87da6ba363a007cf7a"
+    },
+    "user-mgreen-emergency-urgent-care-sensitive.csv": {
+      "id": "user/mgreen/emergency-urgent-care-sensitive/34ac8dd3",
+      "url": "https://codelists.opensafely.org/codelist/user/mgreen/emergency-urgent-care-sensitive/34ac8dd3/",
+      "downloaded_at": "2022-04-06 10:26:36.472731Z",
+      "sha": "e586702407f5822fa64f5ae6b77635b00b9955ae"
+    }
+  }
 }

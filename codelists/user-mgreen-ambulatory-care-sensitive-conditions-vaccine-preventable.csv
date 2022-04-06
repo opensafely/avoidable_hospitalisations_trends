@@ -1,0 +1,19 @@
+code,term
+A35,Other tetanus
+A36,Diphtheria
+A37,Whooping cough
+A80,Acute poliomyelitis
+B05,Measles
+B06,Rubella [German measles]
+B16,Acute hepatitis B
+B18,Chronic viral hepatitis
+B26,Mumps
+G00,"Bacterial meningitis, not elsewhere classified"
+J10,Influenza due to identified seasonal influenza virus
+J11,"Influenza, virus not identified"
+J13,Pneumonia due to Streptococcus pneumoniae
+J14,Pneumonia due to Haemophilus influenzae
+J15,"Bacterial pneumonia, not elsewhere classified"
+J16,"Pneumonia due to other infectious organisms, not elsewhere classified"
+J18,"Pneumonia, organism unspecified"
+M01,Direct infections of joint in infectious and parasitic diseases classified elsewhere
