@@ -131,8 +131,8 @@ input_22_1$date <- "2022-01-01" # Add date
 input_22_2 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-02-01.csv.gz"))) # Load
 input_22_2$date <- "2022-02-01" # Add date
 
-# input_22_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-03-01.csv.gz"))) # Load
-# input_22_3$date <- "2022-03-01" # Add date
+input_22_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-03-01.csv.gz"))) # Load
+input_22_3$date <- "2022-03-01" # Add date
 
 # Join together into single file
 dfs <- sapply(.GlobalEnv, is.data.frame) # Get a list of all objects for below
