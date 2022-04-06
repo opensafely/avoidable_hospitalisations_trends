@@ -10,128 +10,129 @@
 library(data.table)
 # library(ggplot2)
 library(readr)
+library(here)
 
 
 ## 1. Load all data into R and tidy ##
 
 
 # Load data (individually at a time - suggestions for more efficient code welcome!)
-input_19_1 <- read_csv(here::here("/output/measures","input_2019-01-01.csv.gz")) # Load
+input_19_1 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-01-01.csv.gz"))) # Load
 input_19_1$date <- "2019-01-01" # Add date
 
-input_19_2 <- read_csv(here::here("/output/measures","input_2019-02-01.csv.gz")) # Load
+input_19_2 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-02-01.csv.gz"))) # Load
 input_19_2$date <- "2019-02-01" # Add date
 
-input_19_3 <- read_csv(here::here("/output/measures","input_2019-03-01.csv.gz")) # Load
+input_19_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-03-01.csv.gz"))) # Load
 input_19_3$date <- "2019-03-01" # Add date
 
-input_19_4 <- read_csv(here::here("/output/measures","input_2019-04-01.csv.gz")) # Load
+input_19_4 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-04-01.csv.gz"))) # Load
 input_19_4$date <- "2019-04-01" # Add date
 
-input_19_5 <- read_csv(here::here("/output/measures","input_2019-05-01.csv.gz")) # Load
+input_19_5 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-05-01.csv.gz"))) # Load
 input_19_5$date <- "2019-05-01" # Add date
 
-input_19_6 <- read_csv(here::here("/output/measures","input_2019-06-01.csv.gz")) # Load
+input_19_6 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-06-01.csv.gz"))) # Load
 input_19_6$date <- "2019-06-01" # Add date
 
-input_19_7 <- read_csv(here::here("/output/measures","input_2019-07-01.csv.gz")) # Load
+input_19_7 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-07-01.csv.gz"))) # Load
 input_19_7$date <- "2019-07-01" # Add date
 
-input_19_8 <- read_csv(here::here("/output/measures","input_2019-08-01.csv.gz")) # Load
+input_19_8 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-08-01.csv.gz"))) # Load
 input_19_8$date <- "2019-08-01" # Add date
 
-input_19_9 <- read_csv(here::here("/output/measures","input_2019-09-01.csv.gz")) # Load
+input_19_9 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-09-01.csv.gz"))) # Load
 input_19_9$date <- "2019-09-01" # Add date
 
-input_19_10 <- read_csv(here::here("/output/measures","input_2019-10-01.csv.gz")) # Load
+input_19_10 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-10-01.csv.gz"))) # Load
 input_19_10$date <- "2019-10-01" # Add date
 
-input_19_11 <- read_csv(here::here("/output/measures","input_2019-11-01.csv.gz")) # Load
+input_19_11 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-11-01.csv.gz"))) # Load
 input_19_11$date <- "2019-11-01" # Add date
 
-input_19_12 <- read_csv(here::here("/output/measures","input_2019-12-01.csv.gz")) # Load
+input_19_12 <- read_csv(gsub("analysis", "", here("output/measures","input_2019-12-01.csv.gz"))) # Load
 input_19_12$date <- "2019-12-01" # Add date
 
-input_20_1 <- read_csv(here::here("/output/measures","input_2020-01-01.csv.gz")) # Load
+input_20_1 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-01-01.csv.gz"))) # Load
 input_20_1$date <- "2020-01-01" # Add date
 
-input_20_2 <- read_csv(here::here("/output/measures","input_2020-02-01.csv.gz")) # Load
+input_20_2 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-02-01.csv.gz"))) # Load
 input_20_2$date <- "2020-02-01" # Add date
 
-input_20_3 <- read_csv(here::here("/output/measures","input_2020-03-01.csv.gz")) # Load
+input_20_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-03-01.csv.gz"))) # Load
 input_20_3$date <- "2020-03-01" # Add date
 
-input_20_4 <- read_csv(here::here("/output/measures","input_2020-04-01.csv.gz")) # Load
+input_20_4 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-04-01.csv.gz"))) # Load
 input_20_4$date <- "2020-04-01" # Add date
 
-input_20_5 <- read_csv(here::here("/output/measures","input_2020-05-01.csv.gz")) # Load
+input_20_5 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-05-01.csv.gz"))) # Load
 input_20_5$date <- "2020-05-01" # Add date
 
-input_20_6 <- read_csv(here::here("/output/measures","input_2020-06-01.csv.gz")) # Load
+input_20_6 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-06-01.csv.gz"))) # Load
 input_20_6$date <- "2020-06-01" # Add date
 
-input_20_7 <- read_csv(here::here("/output/measures","input_2020-07-01.csv.gz")) # Load
+input_20_7 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-07-01.csv.gz"))) # Load
 input_20_7$date <- "2020-07-01" # Add date
 
-input_20_8 <- read_csv(here::here("/output/measures","input_2020-08-01.csv.gz")) # Load
+input_20_8 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-08-01.csv.gz"))) # Load
 input_20_8$date <- "2020-08-01" # Add date
 
-input_20_9 <- read_csv(here::here("/output/measures","input_2020-09-01.csv.gz")) # Load
+input_20_9 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-09-01.csv.gz"))) # Load
 input_20_9$date <- "2020-09-01" # Add date
 
-input_20_10 <- read_csv(here::here("/output/measures","input_2020-10-01.csv.gz")) # Load
+input_20_10 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-10-01.csv.gz"))) # Load
 input_20_10$date <- "2020-10-01" # Add date
 
-input_20_11 <- read_csv(here::here("/output/measures","input_2020-11-01.csv.gz")) # Load
+input_20_11 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-11-01.csv.gz"))) # Load
 input_20_11$date <- "2020-11-01" # Add date
 
-input_20_12 <- read_csv(here::here("/output/measures","input_2020-12-01.csv.gz")) # Load
+input_20_12 <- read_csv(gsub("analysis", "", here("output/measures","input_2020-12-01.csv.gz"))) # Load
 input_20_12$date <- "2020-12-01" # Add date
 
-input_21_1 <- read_csv(here::here("/output/measures","input_2021-01-01.csv.gz")) # Load
+input_21_1 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-01-01.csv.gz"))) # Load
 input_21_1$date <- "2021-01-01" # Add date
 
-input_21_2 <- read_csv(here::here("/output/measures","input_2021-02-01.csv.gz")) # Load
+input_21_2 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-02-01.csv.gz"))) # Load
 input_21_2$date <- "2021-02-01" # Add date
 
-input_21_3 <- read_csv(here::here("/output/measures","input_2021-03-01.csv.gz")) # Load
+input_21_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-03-01.csv.gz"))) # Load
 input_21_3$date <- "2021-03-01" # Add date
 
-input_21_4 <- read_csv(here::here("/output/measures","input_2021-04-01.csv.gz")) # Load
+input_21_4 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-04-01.csv.gz"))) # Load
 input_21_4$date <- "2021-04-01" # Add date
 
-input_21_5 <- read_csv(here::here("/output/measures","input_2021-05-01.csv.gz")) # Load
+input_21_5 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-05-01.csv.gz"))) # Load
 input_21_5$date <- "2021-05-01" # Add date
 
-input_21_6 <- read_csv(here::here("/output/measures","input_2021-06-01.csv.gz")) # Load
+input_21_6 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-06-01.csv.gz"))) # Load
 input_21_6$date <- "2021-06-01" # Add date
 
-input_21_7 <- read_csv(here::here("/output/measures","input_2021-07-01.csv.gz")) # Load
+input_21_7 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-07-01.csv.gz"))) # Load
 input_21_7$date <- "2021-07-01" # Add date
 
-input_21_8 <- read_csv(here::here("/output/measures","input_2021-08-01.csv.gz")) # Load
+input_21_8 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-08-01.csv.gz"))) # Load
 input_21_8$date <- "2021-08-01" # Add date
 
-input_21_9 <- read_csv(here::here("/output/measures","input_2021-09-01.csv.gz")) # Load
+input_21_9 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-09-01.csv.gz"))) # Load
 input_21_9$date <- "2021-09-01" # Add date
 
-input_21_10 <- read_csv(here::here("/output/measures","input_2021-10-01.csv.gz")) # Load
+input_21_10 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-10-01.csv.gz"))) # Load
 input_21_10$date <- "2021-10-01" # Add date
 
-input_21_11 <- read_csv(here::here("/output/measures","input_2021-11-01.csv.gz")) # Load
+input_21_11 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-11-01.csv.gz"))) # Load
 input_21_11$date <- "2021-11-01" # Add date
 
-input_21_12 <- read_csv(here::here("/output/measures","input_2021-12-01.csv.gz")) # Load
+input_21_12 <- read_csv(gsub("analysis", "", here("output/measures","input_2021-12-01.csv.gz"))) # Load
 input_21_12$date <- "2021-12-01" # Add date
 
-input_22_1 <- read_csv(here::here("/output/measures","input_2022-01-01.csv.gz")) # Load
+input_22_1 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-01-01.csv.gz"))) # Load
 input_22_1$date <- "2022-01-01" # Add date
 
-input_22_2 <- read_csv(here::here("/output/measures","input_2022-02-01.csv.gz")) # Load
+input_22_2 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-02-01.csv.gz"))) # Load
 input_22_2$date <- "2022-02-01" # Add date
 
-input_22_3 <- read_csv(here::here("/output/measures","input_2022-03-01.csv.gz")) # Load
-input_22_3$date <- "2022-03-01" # Add date
+# input_22_3 <- read_csv(gsub("analysis", "", here("output/measures","input_2022-03-01.csv.gz"))) # Load
+# input_22_3$date <- "2022-03-01" # Add date
 
 # Join together into single file
 dfs <- sapply(.GlobalEnv, is.data.frame) # Get a list of all objects for below
@@ -217,7 +218,7 @@ input_imd <- input_imd[, list(admitted = sum(admitted, na.rm =T), iexp_admitted 
 # input_imd$dsr_admitted_upp <- input_imd$dsr_admitted + (1.96 * (sqrt(input_imd$dsr_admitted))) # Upper bound 
 
 # Save
-write.csv(input_imd, file = here::here("/output/measures","standardised_imd_trends.csv")) 
+write.csv(input_imd, file = gsub("analysis", "", here("output/measures","standardised_imd_trends.csv")))
 
 
 
@@ -249,7 +250,7 @@ input_region$dexp_admitted_eucs <- (input_region$admitted_eucs / input_region$po
 input_region <- input_region[, list(admitted = sum(admitted, na.rm =T), iexp_admitted = sum(iexp_admitted , na.rm = T), dexp_admitted = sum(dexp_admitted , na.rm = T), admitted_acs_all = sum(admitted_acs_all, na.rm =T), iexp_admitted_acs_all = sum(iexp_admitted_acs_all , na.rm = T), dexp_admitted_acs_all = sum(dexp_admitted_acs_all , na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm =T), iexp_admitted_acs_acute = sum(iexp_admitted_acs_acute , na.rm = T), dexp_admitted_acs_acute = sum(dexp_admitted_acs_acute , na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm =T), iexp_admitted_acs_chronic = sum(iexp_admitted_acs_chronic , na.rm = T), dexp_admitted_acs_chronic = sum(dexp_admitted_acs_chronic , na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm =T), iexp_admitted_acs_vaccine = sum(iexp_admitted_acs_vaccine , na.rm = T), dexp_admitted_acs_vaccine = sum(dexp_admitted_acs_vaccine , na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm =T), iexp_admitted_eucs = sum(iexp_admitted_eucs , na.rm = T), dexp_admitted_eucs = sum(dexp_admitted_eucs , na.rm = T), pop = sum(pop, na.rm = T), std_pop = sum(std_pop, na.rm = T)), by = c("sex", "region", "date")]
 
 # Save
-write.csv(input_region, file = here::here("/output/measures","standardised_region_trends.csv")) 
+write.csv(input_region, file = gsub("analysis", "", here("output/measures","standardised_region_trends.csv")))
 
 
 # d. Age- and sex-standardise data by urban-rural #
@@ -280,7 +281,7 @@ input_urbrur$dexp_admitted_eucs <- (input_urbrur$admitted_eucs / input_urbrur$po
 input_urbrur <- input_urbrur[, list(admitted = sum(admitted, na.rm =T), iexp_admitted = sum(iexp_admitted , na.rm = T), dexp_admitted = sum(dexp_admitted , na.rm = T), admitted_acs_all = sum(admitted_acs_all, na.rm =T), iexp_admitted_acs_all = sum(iexp_admitted_acs_all , na.rm = T), dexp_admitted_acs_all = sum(dexp_admitted_acs_all , na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm =T), iexp_admitted_acs_acute = sum(iexp_admitted_acs_acute , na.rm = T), dexp_admitted_acs_acute = sum(dexp_admitted_acs_acute , na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm =T), iexp_admitted_acs_chronic = sum(iexp_admitted_acs_chronic , na.rm = T), dexp_admitted_acs_chronic = sum(dexp_admitted_acs_chronic , na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm =T), iexp_admitted_acs_vaccine = sum(iexp_admitted_acs_vaccine , na.rm = T), dexp_admitted_acs_vaccine = sum(dexp_admitted_acs_vaccine , na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm =T), iexp_admitted_eucs = sum(iexp_admitted_eucs , na.rm = T), dexp_admitted_eucs = sum(dexp_admitted_eucs , na.rm = T), pop = sum(pop, na.rm = T), std_pop = sum(std_pop, na.rm = T)), by = c("sex", "urban_rural", "date")]
 
 # Save
-write.csv(input_urbrur, file = here::here("/output/measures","standardised_urbrur_trends.csv")) 
+write.csv(input_urbrur, file = gsub("analysis", "", here("output/measures","standardised_urbrur_trends.csv")))
 
 
 
