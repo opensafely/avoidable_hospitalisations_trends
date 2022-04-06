@@ -14,27 +14,27 @@ from cohortextractor import StudyDefinition, Measure, patients, codelist, codeli
 
 # 1. All ambulatory care sensitive conditions
 acs_codes_all = codelist_from_csv(
-    "codelists/ambulatory_care_sensitive.csv", system="icd10", column="icd10_code" 
+    "codelists/user-mgreen-ambulatory-care-sensitive-conditions.csv", system="icd10", column="icd10_code" 
 )
 
 # 2. Ambulatory care sensitive - only acute conditions
 acs_codes_acute = codelist_from_csv(
-    "codelists/ambulatory_care_sensitive_acute.csv", system="icd10", column="icd10_code" 
+    "codelists/user-mgreen-ambulatory-care-sensitive-conditions-acute.csv", system="icd10", column="icd10_code" 
 )
 
 # 3. Ambulatory care sensitive - only chronic conditions
 acs_codes_chronic = codelist_from_csv(
-    "codelists/ambulatory_care_sensitive_chronic.csv", system="icd10", column="icd10_code" 
+    "codelists/user-mgreen-ambulatory-care-sensitive-conditions-chronic.csv", system="icd10", column="icd10_code" 
 )
 
 # 4. Ambulatory care sensitive - only vaccine preventable conditions
 acs_codes_vacine = codelist_from_csv(
-    "codelists/ambulatory_care_sensitive_vaccine.csv", system="icd10", column="icd10_code" 
+    "codelists/user-mgreen-ambulatory-care-sensitive-conditions-vaccine-preventable.csv", system="icd10", column="icd10_code" 
 )
 
 # 5. Emergency urgent care sensitive
 eucs_codes = codelist_from_csv(
-    "codelists/emergency_urgent_care_sensitive.csv", system="icd10", column="icd10_code" 
+    "codelists/user-mgreen-emergency-urgent-care-sensitive.csv", system="icd10", column="icd10_code" 
 )
 
 
