@@ -44,7 +44,7 @@ eucs_codes = codelist_from_csv(
 
 # Define dates
 index_date = "2019-01-01"
-end_date = "2022-02-28"
+end_date = "2022-03-31"
 
 # Define study paramteres
 study = StudyDefinition(
@@ -319,7 +319,7 @@ measures = [
         id="hosp_admission_by_region",
         numerator="admitted",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -328,7 +328,7 @@ measures = [
         id="hosp_admission_by_imd",
         numerator="admitted",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -337,7 +337,7 @@ measures = [
         id="hosp_admission_by_urban",
         numerator="admitted",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
@@ -367,7 +367,7 @@ measures = [
         id="acs_all_by_region",
         numerator="admitted_acs_all",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -376,7 +376,7 @@ measures = [
         id="acs_all_by_imd",
         numerator="admitted_acs_all",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -385,7 +385,7 @@ measures = [
         id="acs_all_by_urban",
         numerator="admitted_acs_all",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
@@ -415,7 +415,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_acute",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -424,7 +424,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_acute",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -433,7 +433,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_acute",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
@@ -463,7 +463,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_chronic",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -472,7 +472,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_chronic",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -481,7 +481,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_chronic",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
@@ -511,7 +511,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_vaccine",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -520,7 +520,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_vaccine",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -529,7 +529,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_acs_vaccine",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
@@ -559,7 +559,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_eucs",
         denominator="population",
-        group_by="region",
+        group_by=["region", "sex"],
         small_number_suppression=True,
     ),
     
@@ -568,7 +568,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_eucs",
         denominator="population",
-        group_by="imd_quintile",
+        group_by=["imd_quintile", "sex"],
         small_number_suppression=True,
     ),
     
@@ -577,7 +577,7 @@ measures = [
         id="eucs_overall",
         numerator="admitted_eucs",
         denominator="population",
-        group_by="urban_rural",
+        group_by=["urban_rural", "sex"],
         small_number_suppression=True,
     ),
     
