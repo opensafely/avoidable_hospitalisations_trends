@@ -19,7 +19,7 @@ actions:
         measure_csv: output/measures/measure_*.csv
 
   process_data:
-    run: r:latest analysis/age_standardise_trends.R
+    run: r:latest analysis/create_age_standardised_outputs.R
     needs: [generate_study_population]
     outputs:
       moderately_sensitive:
