@@ -3,7 +3,7 @@
 ######################################
 
 
-# Purpose: To age- and sex-standardise all data and create output files.
+# Purpose: To age- and sex-standardise all monthly data and create output files.
 
 
 # Load libraries
