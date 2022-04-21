@@ -121,7 +121,7 @@ input_imd$dexp_admitted_eucs[is.na(input_imd$admitted_eucs)] <- NA
 
 # c. Age- and sex-standardise data by region #
 
-# Aggregate by deprivation quntile, age and sex over time
+# Aggregate by region, age and sex over time
 input_region <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "region", "date")]
 
 # Join on standard population data
@@ -176,7 +176,7 @@ input_region$dexp_admitted_eucs[is.na(input_region$admitted_eucs)] <- NA
 
 # d. Age- and sex-standardise data by urban-rural #
 
-# Aggregate by deprivation quntile, age and sex over time
+# Aggregate by urban-rural, age and sex over time
 input_urbrur <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "urban_rural", "date")]
 
 # Join on standard population data
@@ -227,6 +227,60 @@ input_urbrur$dexp_admitted_acs_vaccine[is.na(input_urbrur$admitted_acs_vaccine)]
 input_urbrur$admitted_eucs[input_urbrur$admitted_eucs <= 5] <- NA 
 input_urbrur$iexp_admitted_eucs[is.na(input_urbrur$admitted_eucs)] <- NA
 input_urbrur$dexp_admitted_eucs[is.na(input_urbrur$admitted_eucs)] <- NA
+
+# e. Age- and sex-standardise data by ethnicity #
+
+# Aggregate by ethnicity, age and sex over time
+input_ethnicity <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "ethnicity", "date")]
+
+# Join on standard population data
+input_ethnicity <- merge(input_ethnicity, std_pop, by = c("age_group", "sex", "date"), all.x = TRUE) # Join expected rates onto the main dataset
+
+# Calculate expected number of admissions (indirect method)
+input_ethnicity$iexp_admitted <- input_ethnicity$pop * input_ethnicity$admitted_rate # Multiple expected rate by population size - repeat for all measures
+input_ethnicity$iexp_admitted_acs_all <- input_ethnicity$pop * input_ethnicity$admitted_acs_all_rate 
+input_ethnicity$iexp_admitted_acs_acute <- input_ethnicity$pop * input_ethnicity$admitted_acs_acute_rate 
+input_ethnicity$iexp_admitted_acs_chronic <- input_ethnicity$pop * input_ethnicity$admitted_acs_chronic_rate 
+input_ethnicity$iexp_admitted_acs_vaccine <- input_ethnicity$pop * input_ethnicity$admitted_acs_vaccine_rate 
+input_ethnicity$iexp_admitted_eucs <- input_ethnicity$pop * input_ethnicity$admitted_eucs_rate 
+
+# Calculate expected number of admissions (direct method)
+input_ethnicity$dexp_admitted <- (input_ethnicity$admitted / input_ethnicity$pop) * input_ethnicity$std_pop # Multiple observed rate by standard population - repeat for all measures
+input_ethnicity$dexp_admitted_acs_all <- (input_ethnicity$admitted_acs_all / input_ethnicity$pop) * input_ethnicity$std_pop
+input_ethnicity$dexp_admitted_acs_acute <- (input_ethnicity$admitted_acs_acute / input_ethnicity$pop) * input_ethnicity$std_pop
+input_ethnicity$dexp_admitted_acs_chronic <- (input_ethnicity$admitted_acs_chronic / input_ethnicity$pop) * input_ethnicity$std_pop
+input_ethnicity$dexp_admitted_acs_vaccine <- (input_ethnicity$admitted_acs_vaccine / input_ethnicity$pop) * input_ethnicity$std_pop
+input_ethnicity$dexp_admitted_eucs <- (input_ethnicity$admitted_eucs / input_ethnicity$pop) * input_ethnicity$std_pop
+
+# Sum data by age
+input_ethnicity <- input_ethnicity[, list(admitted = sum(admitted, na.rm =T), iexp_admitted = sum(iexp_admitted , na.rm = T), dexp_admitted = sum(dexp_admitted , na.rm = T), admitted_acs_all = sum(admitted_acs_all, na.rm =T), iexp_admitted_acs_all = sum(iexp_admitted_acs_all , na.rm = T), dexp_admitted_acs_all = sum(dexp_admitted_acs_all , na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm =T), iexp_admitted_acs_acute = sum(iexp_admitted_acs_acute , na.rm = T), dexp_admitted_acs_acute = sum(dexp_admitted_acs_acute , na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm =T), iexp_admitted_acs_chronic = sum(iexp_admitted_acs_chronic , na.rm = T), dexp_admitted_acs_chronic = sum(dexp_admitted_acs_chronic , na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm =T), iexp_admitted_acs_vaccine = sum(iexp_admitted_acs_vaccine , na.rm = T), dexp_admitted_acs_vaccine = sum(dexp_admitted_acs_vaccine , na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm =T), iexp_admitted_eucs = sum(iexp_admitted_eucs , na.rm = T), dexp_admitted_eucs = sum(dexp_admitted_eucs , na.rm = T), pop = sum(pop, na.rm = T), std_pop = sum(std_pop, na.rm = T)), by = c("sex", "ethnicity", "date")]
+
+# Drop small counts (i.e., <=5) so data can be released
+input_ethnicity <- input_ethnicity[input_ethnicity$pop > 5] # Drop any rows where population is <= 5
+
+input_ethnicity$admitted[input_ethnicity$admitted <= 5] <- NA # So if numnber of admitted is 0-5, then we replace the value as missing
+input_ethnicity$iexp_admitted[is.na(input_ethnicity$admitted)] <- NA # Repeat for both expected counts as derived from above
+input_ethnicity$dexp_admitted[is.na(input_ethnicity$admitted)] <- NA 
+
+input_ethnicity$admitted_acs_all[input_ethnicity$admitted_acs_all <= 5] <- NA # Now repeat process for each measure individually
+input_ethnicity$iexp_admitted_acs_all[is.na(input_ethnicity$admitted_acs_all)] <- NA
+input_ethnicity$dexp_admitted_acs_all[is.na(input_ethnicity$admitted_acs_all)] <- NA
+
+input_ethnicity$admitted_acs_acute[input_ethnicity$admitted_acs_acute <= 5] <- NA 
+input_ethnicity$iexp_admitted_acs_acute[is.na(input_ethnicity$admitted_acs_all)] <- NA
+input_ethnicity$dexp_admitted_acs_acute[is.na(input_ethnicity$admitted_acs_all)] <- NA
+
+input_ethnicity$admitted_acs_chronic[input_ethnicity$admitted_acs_chronic <= 5] <- NA 
+input_ethnicity$iexp_admitted_acs_chronic[is.na(input_ethnicity$admitted_acs_chronic)] <- NA
+input_ethnicity$dexp_admitted_acs_chronic[is.na(input_ethnicity$admitted_acs_chronic)] <- NA
+
+input_ethnicity$admitted_acs_vaccine[input_ethnicity$admitted_acs_vaccine <= 5] <- NA 
+input_ethnicity$iexp_admitted_acs_vaccine[is.na(input_ethnicity$admitted_acs_vaccine)] <- NA
+input_ethnicity$dexp_admitted_acs_vaccine[is.na(input_ethnicity$admitted_acs_vaccine)] <- NA
+
+input_ethnicity$admitted_eucs[input_ethnicity$admitted_eucs <= 5] <- NA 
+input_ethnicity$iexp_admitted_eucs[is.na(input_ethnicity$admitted_eucs)] <- NA
+input_ethnicity$dexp_admitted_eucs[is.na(input_ethnicity$admitted_eucs)] <- NA
 
 
 

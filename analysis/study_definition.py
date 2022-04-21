@@ -37,6 +37,10 @@ eucs_codes = codelist_from_csv(
     "codelists/user-mgreen-emergency-urgent-care-sensitive.csv", system="icd10", column="code" 
 )
 
+# 6. Ethnicity (6 groups)
+ethnicity_codes = codelist_from_csv(
+    "codelists/opensafely-ethnicity.csv", system="ctv3", column="Code" 
+
 
 ### Define study population ###
 
@@ -55,53 +59,34 @@ study = StudyDefinition(
     },
     
     # Define index date
-    index_date = "2019-01-01",
+    index_date = index_date,
     
-    # Select all people
-    population = patients.all(),
-    
-    # # Select patients who have remained at the same practice between the following dates
-    # population = patients.registered_with_one_practice_between( 
-    #     "2019-01-01", "2022-01-31"
-    # ),
+    # Select all people alive and registered at a GP in each month (with complete sex and age data)
+    population=patients.satisfying(
+        """
+        registered
+        AND
+        NOT has_died
+        AND 
+        age <= 120
+        """,
+        registered=patients.registered_as_of(
+            index_date,
+        ),
+        has_died=patients.died_from_any_cause(
+            on_or_before="index_date",
+            returning="binary_flag",
+        ),
+    ),
     
     # Extract data on age
     age = patients.age_as_of( # Select age of patients on the specific date below
-          "2020-03-01",
+          index_date,
           return_expectations={ # Set expectations for patients
             "rate": "universal", # They must have a value (expect all records to have an age)
             "int": {"distribution": "population_ages"}, # Distribution of values should match UK population
           },
     ), 
-    
-    # ageband=patients.categorised_as(
-    #     {
-    #         "0": "DEFAULT",
-    #         "0-15": """ age >= 0 AND age < 16 """,
-    #         "16-29": """ age >= 16 AND age < 30""",
-    #         "30-39": """ age >= 30 AND age < 40""",
-    #         "40-49": """ age >= 40 AND age < 50""",
-    #         "50-59": """ age >= 50 AND age < 60""",
-    #         "60-69": """ age >= 60 AND age < 70""",
-    #         "70-79": """ age >= 70 AND age < 80""",
-    #         "80+": """ age >=  80 AND age < 120""",  
-    #     },
-    #     return_expectations={
-    #         "rate": "universal",
-    #         "category": {
-    #             "ratios": {
-    #                 "0-15": 0.125,
-    #                 "16-29": 0.125,
-    #                 "30-39": 0.125,
-    #                 "40-49": 0.125,
-    #                 "50-59": 0.125,
-    #                 "60-69": 0.125,
-    #                 "70-79": 0.125,
-    #                 "80+": 0.125,
-    #             }
-    #         },
-    #     },
-    # ),
     
     # Extract patient's sex   
     sex = patients.sex(
@@ -111,9 +96,70 @@ study = StudyDefinition(
           }
     ),
     
+    # Define ethnicity when reported
+    ethnicity_gp=patients.with_these_clinical_events(
+        ethnicity_codes,
+        returning="category",
+        on_or_before="index_date",
+        find_last_match_in_period=True,
+        include_date_of_match=False,
+        return_expectations={"category": {"ratios": {"1": 0.2, "2": 0.2, "3": 0.2, "4": 0.2, "5": 0.2}},
+                             "incidence": 0.75},
+    ),
+
+    # Get records from SUS
+    ethnicity_sus=patients.with_ethnicity_from_sus(
+        returning="group_6",
+        use_most_frequent_code=True,
+        return_expectations={
+            "category": {
+                            "ratios": {
+                                "1": 0.2,
+                                "2": 0.2,
+                                "3": 0.2,
+                                "4": 0.2,
+                                "5": 0.2
+                                }
+                            },
+            "incidence": 0.4,
+            },
+    ),
+
+    # Fill missing ethnicity from SUS
+    ethnicity=patients.categorised_as(
+            {
+                "0": "DEFAULT",
+                "1": "ethnicity_gp='1' OR (NOT ethnicity_gp AND ethnicity_sus='1')",
+                "2": "ethnicity_gp='2' OR (NOT ethnicity_gp AND ethnicity_sus='2')",
+                "3": "ethnicity_gp='3' OR (NOT ethnicity_gp AND ethnicity_sus='3')",
+                "4": "ethnicity_gp='4' OR (NOT ethnicity_gp AND ethnicity_sus='4')",
+                "5": "ethnicity_gp='5' OR (NOT ethnicity_gp AND ethnicity_sus='5')",
+            },
+            return_expectations={
+                "category": {
+                                "ratios": {
+                                    "0": 0.5,  # missing in 50%
+                                    "1": 0.1,
+                                    "2": 0.1,
+                                    "3": 0.1,
+                                    "4": 0.1,
+                                    "5": 0.1
+                                    }
+                                },
+                "rate": "universal",
+            },
+    ),
+    
+    # Note:
+    # White = 1
+    # Mixed = 2
+    # Asian or Asian British = 3
+    # Black or Black British = 4
+    # Other ethnic groups = 5
+    
     # Region
     region = patients.registered_practice_as_of(
-    "2020-03-01",
+        index_date,
         returning="nuts1_region_name",
         return_expectations={
             "rate": "universal",
@@ -175,11 +221,21 @@ study = StudyDefinition(
     
     # Urban-rural
     urban_rural = patients.address_as_of(
-        "2020-03-01",
+        index_date,
         returning="rural_urban_classification",
         return_expectations={ # Need to update if not correct categories
             "rate": "universal",
             "category": {"ratios": {"Urban": 0.8, "Rural": 0.2}},
+        },
+    ),
+
+    # Number of GP observations during the month
+    gp_count = patients.with_gp_consultations(
+        between=["index_date", "last_day_of_month(index_date)"],
+        returning="number_of_matches_in_period",
+        return_expectations={
+            "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+            "incidence": 0.6,
         },
     ),
 
@@ -191,17 +247,19 @@ study = StudyDefinition(
     #     return_expectations={"incidence": 0.1},
     # ),
     
-    # Admitted to hospital - all admissions
+    # Admitted to hospital - all emergency admissions
     admitted = patients.admitted_to_hospital(
         returning="binary_flag",
         between=["index_date", "last_day_of_month(index_date)"],
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'], # Select all emergency admissions only
         return_expectations={"incidence": 0.1},
     ),
     
     # Admitted to hospital - all ambulatory care sensitive
     admitted_acs_all = patients.admitted_to_hospital(
         returning="binary_flag",
-        with_these_diagnoses=acs_codes_all,
+        with_these_primary_diagnoses=acs_codes_all,
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'],
         between=["index_date", "last_day_of_month(index_date)"],
         return_expectations={"incidence": 0.1},
     ),
@@ -209,7 +267,8 @@ study = StudyDefinition(
     # Admitted to hospital - ambulatory care sensitive - acute
     admitted_acs_acute = patients.admitted_to_hospital(
         returning="binary_flag",
-        with_these_diagnoses=acs_codes_acute,
+        with_these_primary_diagnoses=acs_codes_acute,
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'],
         between=["index_date", "last_day_of_month(index_date)"],
         return_expectations={"incidence": 0.1},
     ),
@@ -217,7 +276,8 @@ study = StudyDefinition(
     # Admitted to hospital - ambulatory care sensitive - chronic
     admitted_acs_chronic = patients.admitted_to_hospital(
         returning="binary_flag",
-        with_these_diagnoses=acs_codes_chronic,
+        with_these_primary_diagnoses=acs_codes_chronic,
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'],
         between=["index_date", "last_day_of_month(index_date)"],
         return_expectations={"incidence": 0.1},
     ),
@@ -225,7 +285,8 @@ study = StudyDefinition(
     # Admitted to hospital - ambulatory care sensitive - vaccine preventable
     admitted_acs_vaccine = patients.admitted_to_hospital(
         returning="binary_flag",
-        with_these_diagnoses=acs_codes_vacine,
+        with_these_primary_diagnoses=acs_codes_vacine,
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'],
         between=["index_date", "last_day_of_month(index_date)"],
         return_expectations={"incidence": 0.1},
     ),
@@ -233,7 +294,8 @@ study = StudyDefinition(
     # Admitted to hospital - emergency urgent care sensitive
     admitted_eucs = patients.admitted_to_hospital(
         returning="binary_flag",
-        with_these_diagnoses=eucs_codes,
+        with_these_primary_diagnoses=eucs_codes,
+        with_admission_method=['21', '2A', '22', '23', '24', '25', '2D', '28', '2B'],
         between=["index_date", "last_day_of_month(index_date)"],
         return_expectations={"incidence": 0.1},
     ),
@@ -257,7 +319,7 @@ study = StudyDefinition(
 
     # # Died of specific causes
     # died_avoidable = patients.with_these_codes_on_death_certificate(
-    #     codelist=opensafely-test,
+    #     codelist=codelist,
     #     on_or_after="2020-02-01",
     #     match_only_underlying_cause=False,
     #     return_expectations={
@@ -314,32 +376,32 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 1c. Region
-    Measure(
-        id="hosp_admission_by_region",
-        numerator="admitted",
-        denominator="population",
-        group_by=["region", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 1d. Deprivation
-    Measure(
-        id="hosp_admission_by_imd",
-        numerator="admitted",
-        denominator="population",
-        group_by=["imd_quintile", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 1e. Urban-rural
-    Measure(
-        id="hosp_admission_by_urban",
-        numerator="admitted",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
+    # # 1c. Region
+    # Measure(
+    #     id="hosp_admission_by_region",
+    #     numerator="admitted",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 1d. Deprivation
+    # Measure(
+    #     id="hosp_admission_by_imd",
+    #     numerator="admitted",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 1e. Urban-rural
+    # Measure(
+    #     id="hosp_admission_by_urban",
+    #     numerator="admitted",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
     
     
     # 2. Ambulatory care sensitive conditions - all
@@ -362,33 +424,33 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 2c. Region
-        Measure(
-        id="acs_all_by_region",
-        numerator="admitted_acs_all",
-        denominator="population",
-        group_by=["region", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 2d. Deprivation
-        Measure(
-        id="acs_all_by_imd",
-        numerator="admitted_acs_all",
-        denominator="population",
-        group_by=["imd_quintile", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 2e. Urban-rural
-    Measure(
-        id="acs_all_by_urban",
-        numerator="admitted_acs_all",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
-    
+    # # 2c. Region
+    #     Measure(
+    #     id="acs_all_by_region",
+    #     numerator="admitted_acs_all",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 2d. Deprivation
+    #     Measure(
+    #     id="acs_all_by_imd",
+    #     numerator="admitted_acs_all",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 2e. Urban-rural
+    # Measure(
+    #     id="acs_all_by_urban",
+    #     numerator="admitted_acs_all",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
     
     # 3. Ambulatory care sensitive conditions - acute conditions only
     
@@ -410,32 +472,32 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 3c. Region
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_acute",
-        denominator="population",
-        group_by=["region", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 3d. Deprivation
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_acute",
-        denominator="population",
-        group_by=["imd_quintile", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 3e. Urban-rural
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_acute",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
+    # # 3c. Region
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_acute",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 3d. Deprivation
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_acute",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 3e. Urban-rural
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_acute",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
     
     
     # 4. Ambulatory care sensitive conditions - chronic conditions only
@@ -458,32 +520,32 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 4c. Region
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_chronic",
-        denominator="population",
-        group_by=["region", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 4d. Deprivation
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_chronic",
-        denominator="population",
-        group_by=["imd_quintile", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 4e. Urban-rural
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_chronic",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
+    # # 4c. Region
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_chronic",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 4d. Deprivation
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_chronic",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 4e. Urban-rural
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_chronic",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
     
     
     # 5. Ambulatory care sensitive conditions - vaccine preventable conditions only
@@ -506,32 +568,32 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 5c. Region
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_vaccine",
-        denominator="population",
-        group_by=["region", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 5d. Deprivation
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_vaccine",
-        denominator="population",
-        group_by=["imd_quintile", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    # 5e. Urban-rural
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_acs_vaccine",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
+    # # 5c. Region
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_vaccine",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 5d. Deprivation
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_vaccine",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 5e. Urban-rural
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_acs_vaccine",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
     
     
     # 6. Emergency urgent care sensitive conditions
@@ -554,33 +616,51 @@ measures = [
         small_number_suppression=True,
     ),
     
-    # 6c. Region
+    # # 6c. Region
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_eucs",
+    #     denominator="population",
+    #     group_by=["region", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 6d. Deprivation
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_eucs",
+    #     denominator="population",
+    #     group_by=["imd_quintile", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    # 
+    # # 6e. Urban-rural
+    # Measure(
+    #     id="eucs_overall",
+    #     numerator="admitted_eucs",
+    #     denominator="population",
+    #     group_by=["urban_rural", "sex"],
+    #     small_number_suppression=True,
+    # ),
+    
+    # 7. Number of GP observations
+    
+    # 7a. Overall
     Measure(
-        id="eucs_overall",
-        numerator="admitted_eucs",
+        id="gp_overall",
+        numerator="gp_count",
         denominator="population",
-        group_by=["region", "sex"],
+        group_by="population",
         small_number_suppression=True,
     ),
     
-    # 6d. Deprivation
+        # 7a. Overall
     Measure(
-        id="eucs_overall",
-        numerator="admitted_eucs",
+        id="gp_by_sex",
+        numerator="gp_count",
         denominator="population",
-        group_by=["imd_quintile", "sex"],
+        group_by="sex",
         small_number_suppression=True,
     ),
-    
-    # 6e. Urban-rural
-    Measure(
-        id="eucs_overall",
-        numerator="admitted_eucs",
-        denominator="population",
-        group_by=["urban_rural", "sex"],
-        small_number_suppression=True,
-    ),
-    
-    
     
 ]

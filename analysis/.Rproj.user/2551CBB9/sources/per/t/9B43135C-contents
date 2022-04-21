@@ -25,6 +25,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- input_imd # Resave object in what we will output (do for each)
 output_region <- input_region
 output_urbrur <- input_urbrur
+output_ethnicity <- input_ethnicity
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # February 2019
@@ -34,6 +35,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # March 2019
@@ -43,6 +45,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # April 2019
@@ -52,6 +55,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # May 2019
@@ -61,6 +65,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # June 2019
@@ -70,6 +75,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # July 2019
@@ -79,6 +85,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # August 2019
@@ -88,6 +95,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # September 2019
@@ -97,6 +105,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # October 2019
@@ -106,6 +115,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # November 2019
@@ -115,6 +125,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # December 2019
@@ -124,6 +135,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # January 2020
@@ -133,6 +145,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # February 2020
@@ -142,6 +155,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # March 2020
@@ -151,6 +165,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # April 2020
@@ -160,6 +175,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # May 2020
@@ -169,6 +185,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # June 2020
@@ -178,6 +195,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # July 2020
@@ -187,6 +205,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # August 2020
@@ -196,6 +215,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # September 2020
@@ -205,6 +225,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # October 2020
@@ -214,6 +235,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # November 2020
@@ -223,6 +245,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # December 2020
@@ -232,6 +255,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # January 2021
@@ -241,6 +265,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # February 2021
@@ -250,6 +275,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # March 2021
@@ -259,6 +285,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # April 2021
@@ -268,6 +295,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # May 2021
@@ -277,6 +305,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # June 2021
@@ -286,6 +315,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # July 2021
@@ -295,6 +325,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # August 2021
@@ -304,6 +335,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # September 2021
@@ -313,6 +345,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # October 2021
@@ -322,6 +355,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # November 2021
@@ -331,6 +365,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # December 2021
@@ -340,6 +375,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # January 2022
@@ -349,6 +385,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # February 2022
@@ -358,6 +395,7 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
 # March 2022
@@ -367,7 +405,17 @@ source(here("analysis", "age_standardise_month.R")) # Call age-standardisation s
 output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
 output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
+output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
+
+# # April 2022
+# input <- read_csv(gsub("analysis", "", here("output/measures","input_2022-04-01.csv.gz"))) # Load
+# input$date <- "2022-04-01" # Add date
+# source(here("analysis", "age_standardise_month.R")) # Call age-standardisation script
+# output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
+# output_region <- rbind(output_region, input_region)
+# output_urbrur <- rbind(output_urbrur, input_urbrur)
+# rm(input_imd, input_region, input_urbrur) # Tidy
 
 
 
@@ -376,4 +424,4 @@ rm(input_imd, input_region, input_urbrur) # Tidy
 write.csv(output_imd, file = gsub("analysis", "", here("output/measures","standardised_imd_trends.csv")))
 write.csv(output_region, file = gsub("analysis", "", here("output/measures","standardised_region_trends.csv")))
 write.csv(output_urbrur, file = gsub("analysis", "", here("output/measures","standardised_urbrur_trends.csv")))
-
+write.csv(output_ethnicity, file = gsub("analysis", "", here("output/measures","standardised_ethnicity_trends.csv")))

@@ -3,7 +3,7 @@
     "path": "~/GitHub/avoidable_hospitalisations_trends/analysis/study_definition.py",
     "project_path": "study_definition.py",
     "type": "python",
-    "hash": "1835009589",
+    "hash": "4043934981",
     "contents": "",
     "dirty": false,
     "created": 1644493314333.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "570,41",
-        "scrollLine": "0"
+        "cursorPosition": "661,23",
+        "scrollLine": "623"
     },
     "folds": "",
-    "lastKnownWriteTime": 1649244385,
+    "lastKnownWriteTime": 1650548757,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1649244385469,
+    "last_content_update": 1650548757204,
     "read_only": false,
     "read_only_alternatives": []
 }
