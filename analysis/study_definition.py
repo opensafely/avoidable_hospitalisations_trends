@@ -37,9 +37,9 @@ eucs_codes = codelist_from_csv(
     "codelists/user-mgreen-emergency-urgent-care-sensitive.csv", system="icd10", column="code" 
 )
 
-# 6. Ethnicity (6 groups)
+# 6. Ethnicity 
 ethnicity_codes = codelist_from_csv(
-    "codelists/opensafely-ethnicity.csv", system="ctv3", column="Code" 
+    "codelists/opensafely-ethnicity.csv", system="ctv3", column="Code")
 
 
 ### Define study population ###
