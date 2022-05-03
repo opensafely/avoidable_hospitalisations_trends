@@ -408,14 +408,14 @@ output_urbrur <- rbind(output_urbrur, input_urbrur)
 output_ethnicity <- rbind(output_ethnicity, input_ethnicity)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
-# # April 2022
-# input <- read_csv(gsub("analysis", "", here("output/measures","input_2022-04-01.csv.gz"))) # Load
-# input$date <- "2022-04-01" # Add date
-# source(here("analysis", "age_standardise_month.R")) # Call age-standardisation script
-# output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
-# output_region <- rbind(output_region, input_region)
-# output_urbrur <- rbind(output_urbrur, input_urbrur)
-# rm(input_imd, input_region, input_urbrur) # Tidy
+# April 2022
+input <- read_csv(gsub("analysis", "", here("output/measures","input_2022-04-01.csv.gz"))) # Load
+input$date <- "2022-04-01" # Add date
+source(here("analysis", "age_standardise_month.R")) # Call age-standardisation script
+output_imd <- rbind(output_imd, input_imd) # Add month records to output file (for each)
+output_region <- rbind(output_region, input_region)
+output_urbrur <- rbind(output_urbrur, input_urbrur)
+rm(input_imd, input_region, input_urbrur) # Tidy
 
 
 

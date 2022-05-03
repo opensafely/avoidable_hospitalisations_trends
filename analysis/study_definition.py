@@ -48,7 +48,7 @@ ethnicity_codes = codelist_from_csv(
 
 # Define dates
 index_date = "2019-01-01"
-end_date = "2022-03-31"
+end_date = "2022-04-30"
 
 # Define study paramteres
 study = StudyDefinition(
