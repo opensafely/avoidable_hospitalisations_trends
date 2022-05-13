@@ -417,6 +417,11 @@ output_region <- rbind(output_region, input_region)
 output_urbrur <- rbind(output_urbrur, input_urbrur)
 rm(input_imd, input_region, input_urbrur) # Tidy
 
+# Make sure sex = U or I records are dropped
+output_imd <- output_imd[output_imd$sex == "M" | output_imd$sex == "F"]
+output_region <- output_region[output_region$sex == "M" | output_region$sex == "F"]
+output_urbrur <- output_urbrur[output_urbrur$sex == "M" | output_urbrur$sex == "F"]
+output_ethnicity <- output_ethnicity[output_ethnicity$sex == "M" | output_ethnicity$sex == "F"]
 
 
 ## 2. Save output ##
