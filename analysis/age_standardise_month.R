@@ -29,7 +29,7 @@ input[age_group=="(79,120]", age_group:="80+"]
 # b. Calculate summary counts for total by sex (does not need standardising)
 
 # Aggregate data by sex and date
-input_sex <- , list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("sex", "date")] 
+input_sex <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("sex", "date")] 
 
 # Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
 input_sex$pop <- round_any(input_sex$pop, 5) # Do for each measure
