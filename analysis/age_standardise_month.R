@@ -9,6 +9,7 @@
 
 ## 1. Tidy data ##
 
+# a. Edit data into required format for processing
 
 # Convert to data.table format as I think the library is ace, sorry not sorry
 input <- data.table(input)
@@ -25,6 +26,28 @@ input[age_group=="(59,69]", age_group:="60-69"]
 input[age_group=="(69,79]", age_group:="70-79"]
 input[age_group=="(79,120]", age_group:="80+"]
 
+# b. Calculate summary counts for total by sex (does not need standardising)
+
+# Aggregate data by sex and date
+input_sex <- , list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("sex", "date")] 
+
+# Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
+input_sex$pop <- round_any(input_sex$pop, 5) # Do for each measure
+input_sex$admitted <- round_any(input_sex$admitted, 5)
+input_sex$admitted_acs_all <- round_any(input_sex$admitted_acs_all, 5)
+input_sex$admitted_acs_acute <- round_any(input_sex$admitted_acs_acute, 5)
+input_sex$admitted_acs_chronic <- round_any(input_sex$admitted_acs_chronic, 5)
+input_sex$admitted_acs_vaccine <- round_any(input_sex$admitted_acs_vaccine, 5)
+input_sex$admitted_eucs <- round_any(input_sex$admitted_eucs, 5)
+
+# Drop small counts (i.e., <=5) so data can be released
+input_sex <- input_sex[input_sex$pop > 5] # Drop any rows where population is <= 5
+input_sex$admitted[input_sex$admitted <= 5] <- NA # So if numnber of admitted is 0-5, then we replace the value as missing
+input_sex$admitted_acs_all[input_sex$admitted_acs_all <= 5] <- NA # Now repeat process for each measure individually
+input_sex$admitted_acs_acute[input_sex$admitted_acs_acute <= 5] <- NA 
+input_sex$admitted_acs_chronic[input_sex$admitted_acs_chronic <= 5] <- NA 
+input_sex$admitted_acs_vaccine[input_sex$admitted_acs_vaccine <= 5] <- NA 
+input_sex$admitted_eucs[input_sex$admitted_eucs <= 5] <- NA 
 
 
 ## 2. Age- and sex-standardise data ##
@@ -46,6 +69,15 @@ std_pop <- std_pop[, c("age_group", "sex", "date", "std_pop", "admitted_rate", "
 
 # Aggregate by deprivation quntile, age and sex over time
 input_imd <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "imd_quintile", "date")]
+
+# Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
+input_imd$pop <- round_any(input_imd$pop, 5) # Do for each measure
+input_imd$admitted <- round_any(input_imd$admitted, 5)
+input_imd$admitted_acs_all <- round_any(input_imd$admitted_acs_all, 5)
+input_imd$admitted_acs_acute <- round_any(input_imd$admitted_acs_acute, 5)
+input_imd$admitted_acs_chronic <- round_any(input_imd$admitted_acs_chronic, 5)
+input_imd$admitted_acs_vaccine <- round_any(input_imd$admitted_acs_vaccine, 5)
+input_imd$admitted_eucs <- round_any(input_imd$admitted_eucs, 5)
 
 # Join on standard population data
 input_imd <- merge(input_imd, std_pop, by = c("age_group", "sex", "date"), all.x = TRUE) # Join expected rates onto the main dataset
@@ -124,6 +156,15 @@ input_imd$dexp_admitted_eucs[is.na(input_imd$admitted_eucs)] <- NA
 # Aggregate by region, age and sex over time
 input_region <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "region", "date")]
 
+# Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
+input_region$pop <- round_any(input_region$pop, 5) # Do for each measure
+input_region$admitted <- round_any(input_region$admitted, 5)
+input_region$admitted_acs_all <- round_any(input_region$admitted_acs_all, 5)
+input_region$admitted_acs_acute <- round_any(input_region$admitted_acs_acute, 5)
+input_region$admitted_acs_chronic <- round_any(input_region$admitted_acs_chronic, 5)
+input_region$admitted_acs_vaccine <- round_any(input_region$admitted_acs_vaccine, 5)
+input_region$admitted_eucs <- round_any(input_region$admitted_eucs, 5)
+
 # Join on standard population data
 input_region <- merge(input_region, std_pop, by = c("age_group", "sex", "date"), all.x = TRUE) # Join expected rates onto the main dataset
 
@@ -179,6 +220,15 @@ input_region$dexp_admitted_eucs[is.na(input_region$admitted_eucs)] <- NA
 # Aggregate by urban-rural, age and sex over time
 input_urbrur <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "urban_rural", "date")]
 
+# Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
+input_urbrur$pop <- round_any(input_urbrur$pop, 5) # Do for each measure
+input_urbrur$admitted <- round_any(input_urbrur$admitted, 5)
+input_urbrur$admitted_acs_all <- round_any(input_urbrur$admitted_acs_all, 5)
+input_urbrur$admitted_acs_acute <- round_any(input_urbrur$admitted_acs_acute, 5)
+input_urbrur$admitted_acs_chronic <- round_any(input_urbrur$admitted_acs_chronic, 5)
+input_urbrur$admitted_acs_vaccine <- round_any(input_urbrur$admitted_acs_vaccine, 5)
+input_urbrur$admitted_eucs <- round_any(input_urbrur$admitted_eucs, 5)
+
 # Join on standard population data
 input_urbrur <- merge(input_urbrur, std_pop, by = c("age_group", "sex", "date"), all.x = TRUE) # Join expected rates onto the main dataset
 
@@ -232,6 +282,15 @@ input_urbrur$dexp_admitted_eucs[is.na(input_urbrur$admitted_eucs)] <- NA
 
 # Aggregate by ethnicity, age and sex over time
 input_ethnicity <- input[, list(admitted = sum(admitted, na.rm =T), admitted_acs_all = sum(admitted_acs_all, na.rm = T), admitted_acs_acute = sum(admitted_acs_acute, na.rm = T), admitted_acs_chronic = sum(admitted_acs_chronic, na.rm = T), admitted_acs_vaccine = sum(admitted_acs_vaccine, na.rm = T), admitted_eucs = sum(admitted_eucs, na.rm = T), pop = .N), by = c("age_group", "sex", "ethnicity", "date")]
+
+# Round counts to nearest 5 (for disclosure purposes as requested by OpenSAFELY team)
+input_ethnicity$pop <- round_any(input_ethnicity$pop, 5) # Do for each measure
+input_ethnicity$admitted <- round_any(input_ethnicity$admitted, 5)
+input_ethnicity$admitted_acs_all <- round_any(input_ethnicity$admitted_acs_all, 5)
+input_ethnicity$admitted_acs_acute <- round_any(input_ethnicity$admitted_acs_acute, 5)
+input_ethnicity$admitted_acs_chronic <- round_any(input_ethnicity$admitted_acs_chronic, 5)
+input_ethnicity$admitted_acs_vaccine <- round_any(input_ethnicity$admitted_acs_vaccine, 5)
+input_ethnicity$admitted_eucs <- round_any(input_ethnicity$admitted_eucs, 5)
 
 # Join on standard population data
 input_ethnicity <- merge(input_ethnicity, std_pop, by = c("age_group", "sex", "date"), all.x = TRUE) # Join expected rates onto the main dataset
