@@ -62,7 +62,25 @@ ggplot(trends_imd[trends_imd$imd_quintile != 0,], aes(x = date, y = sir, group =
 trends_imd$sir_low <- trends_imd$sir - (1.96 * (sqrt(trends_imd$admitted_eucs)/ trends_imd$iexp_admitted_eucs)) # Lower bound 
 trends_imd$sir_upp <- trends_imd$sir + (1.96 * (sqrt(trends_imd$admitted_eucs)/ trends_imd$iexp_admitted_eucs)) # Upper bound 
 
-test <- phe_sii(data = trends_imd, quantile = imd_quintile, population = pop, value = sir, value_type = 0, lower_cl = sir_low, upper_cl = sir_upp, confidence = 0.95, rii = FALSE, type = "standard")
+# test code
+trends_imd$sdr_admitted <- (trends_imd$dexp_admitted / trends_imd$pop) * 100000
+> trends_imd$dsr_admitted_low <- trends_imd$sdr_admitted  - (1.96 * (sqrt(trends_imd$sdr_admitted ))) # Lower bound 
+> trends_imd$dsr_admitted_upp <- trends_imd$sdr_admitted  + (1.96 * (sqrt(trends_imd$sdr_admitted ))) # Upper bound 
+
+males <- phe_sii(data = group_by(trends_imd[trends_imd$imd_quintile != 0 & !is.na(trends_imd$sdr_admitted) & trends_imd$sex == "M",], date), quantile = imd_quintile, population = pop, value = sdr_admitted , value_type = 0, lower_cl = dsr_admitted_low , upper_cl = dsr_admitted_upp, confidence = 0.95, rii = FALSE, type = "standard")
+males$sii <- males$sii * -1 # IMD is wrong way around?
+
+males_rii <- phe_sii(data = group_by(trends_imd[trends_imd$imd_quintile != 0 & !is.na(trends_imd$sdr_admitted) & trends_imd$sex == "M",], date), quantile = imd_quintile, population = pop, value = sdr_admitted , value_type = 0, lower_cl = dsr_admitted_low , upper_cl = dsr_admitted_upp, confidence = 0.95, rii = TRUE, type = "standard")
+
+ggplot(males, aes(x = date, y = sii)) +
+  geom_line() +
+  #facet_wrap(~sex) +
+  scale_x_date(date_breaks = "6 months", date_labels = "%m-%y")
+
+ggplot(males_rii, aes(x = date, y = rii)) +
+  geom_line() +
+  #facet_wrap(~sex) +
+  scale_x_date(date_breaks = "6 months", date_labels = "%m-%y")
 
 # Ethnicity
 trends_eth$smr <- trends_eth$admitted / trends_eth$iexp_admitted # SMR (indirect)
