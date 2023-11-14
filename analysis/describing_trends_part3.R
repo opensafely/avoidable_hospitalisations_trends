@@ -306,7 +306,7 @@ overall_eth_plot_f <- eth1_f + eth2_f + eth3_f + eth4_f + eth5_f + eth6_f + # Co
   plot_annotation(tag_levels = 'A') + # Give plot labels
   plot_annotation(title = "Trends in female hospital admissions by ethnicity",
                   subtitle = "Directly age-standardised admission rates per 100,000 population",
-                  caption = "A = Total emergency hospital admissions, B = All ambulatory care admissions, \nC = Acute ambulatory care admissions, D = Chronic ambulatory care admissions, \nE = Vaccine-preventable ambulatory care admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
+                  caption = "A = Total emergency hospital admissions, B = All ambulatory care sensitive admissions, \nC = Acute ambulatory care sensitive admissions, D = Chronic ambulatory care sensitive admissions, \nE = Vaccine-preventable ambulatory care sensitive admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
   plot_layout(guides = "collect") & theme(legend.position = "bottom") # Use same legend and place at bottom
 overall_eth_plot_f
 ggsave(overall_eth_plot_f, filename = "../output/plots/eth_trends_f.jpeg")
@@ -315,7 +315,7 @@ overall_eth_plot_m <- eth1_m + eth2_m + eth3_m + eth4_m + eth5_m + eth6_m + # Co
   plot_annotation(tag_levels = 'A') + # Give plot labels
   plot_annotation(title = "Trends in male hospital admissions by ethnicity",
                   subtitle = "Directly age-standardised admission rates per 100,000 population",
-                  caption = "A = Total emergency hospital admissions, B = All ambulatory care admissions, \nC = Acute ambulatory care admissions, D = Chronic ambulatory care admissions, \nE = Vaccine-preventable ambulatory care admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
+                  caption = "A = Total emergency hospital admissions, B = All ambulatory care sensitive admissions, \nC = Acute ambulatory care sensitive admissions, D = Chronic ambulatory care sensitive admissions, \nE = Vaccine-preventable ambulatory care sensitive admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
   plot_layout(guides = "collect") & theme(legend.position = "bottom") # Use same legend and place at bottom
 overall_eth_plot_m
 ggsave(overall_eth_plot_m, filename = "../output/plots/eth_trends_m.jpeg")

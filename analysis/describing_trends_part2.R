@@ -316,7 +316,7 @@ overall_urb_plot_f <- urb1_f + urb2_f + urb3_f + urb4_f + urb5_f + urb6_f + # Co
   plot_annotation(tag_levels = 'A') + # Give plot labels
   plot_annotation(title = "Trends in female hospital admissions by location",
                   subtitle = "Directly age-standardised admission rates per 100,000 population",
-                  caption = "A = Total emergency hospital admissions, B = All ambulatory care admissions, \nC = Acute ambulatory care admissions, D = Chronic ambulatory care admissions, \nE = Vaccine-preventable ambulatory care admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
+                  caption = "A = Total emergency hospital admissions, B = All ambulatory care sensitive admissions, \nC = Acute ambulatory care sensitive admissions, D = Chronic ambulatory care sensitive admissions, \nE = Vaccine-preventable ambulatory care sensitive admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
   plot_layout(guides = "collect") & theme(legend.position = "bottom") # Use same legend and place at bottom
 overall_urb_plot_f
 ggsave(overall_urb_plot_f, filename = "../output/plots/urbrur_trends_f.jpeg")
@@ -325,7 +325,7 @@ overall_urb_plot_m <- urb1_m + urb2_m + urb3_m + urb4_m + urb5_m + urb6_m + # Co
   plot_annotation(tag_levels = 'A') + # Give plot labels
   plot_annotation(title = "Trends in male hospital admissions by location",
                   subtitle = "Directly age-standardised admission rates per 100,000 population",
-                  caption = "A = Total emergency hospital admissions, B = All ambulatory care admissions, \nC = Acute ambulatory care admissions, D = Chronic ambulatory care admissions, \nE = Vaccine-preventable ambulatory care admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
+                  caption = "A = Total emergency hospital admissions, B = All ambulatory care sensitive admissions, \nC = Acute ambulatory care sensitive admissions, D = Chronic ambulatory care sensitive admissions, \nE = Vaccine-preventable ambulatory care sensitive admissions, F = Emergency urgent care sensitive conditions.") + # Add title and descriptions
   plot_layout(guides = "collect") & theme(legend.position = "bottom") # Use same legend and place at bottom
 overall_urb_plot_m
 ggsave(overall_urb_plot_m, filename = "../output/plots/urbrur_trends_m.jpeg")
