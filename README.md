@@ -4,6 +4,7 @@
 
 Details of the purpose and any published outputs from this project can be found at the link above.
 
+[Published paper in BMJ Open](https://doi.org/10.1136/bmjopen-2023-077948)
 [Preprint available on medRxiv](https://www.medrxiv.org/content/10.1101/2022.12.14.22283458v1)
 
 The contents of this repository MUST NOT be considered an accurate or valid representation of the study or its purpose. This repository may reflect an incomplete or incorrect analysis with no further ongoing work.
